@@ -1,17 +1,23 @@
 <?php 
 	include "config.php";
-	if (isset($_SESSION['usuario'])){
-            $consulta_sql = "SELECT * FROM usuario WHERE id_usuario = '".$_SESSION['usuario']."' ";
+	if (isset($_POST['email'])){
+            $user =$_POST['email'];
+            $consulta_sql = "INSERT INTO `usuario`(`pass`, `email`, `nombre`) VALUES (
+            '".md5($_POST['pass'])."',
+             '".$_POST['email']."',
+              '".$_POST['user']."'
+            ) ";
             $consulta = mysql_query($consulta_sql);
-            $usuario_datos = mysql_fetch_array($consulta);
-            if ($usuario_datos['tipo'] == 1){
-                echo "<script>window.location='admin/'</script>";
-            }else{
-                echo "<script>window.location='ingreso/'</script>";
-            }    
-	}
+            
+           
+        
+			echo "<script>alert('Registrado con exito!'); window.location='index.php?error_login=3'</script>";
+                
+    
+    }
 ?>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,49 +31,30 @@
 
 <body>
     <center>
-        <?php if(isset($_GET['error_login'])){
-            if ($_GET['error_login'] == 0)
-                echo "<div class='alert alert-primary'>ERROR EN LA BASE DE DATOS</div>";
-            if ($_GET['error_login'] == 1)
-                echo "<div class='alert alert-primary'>ERROR EN EL USUARIO</div>";
-            if ($_GET['error_login'] == 2)
-                echo "<div class='alert alert-primary'>ERROR EN EL PASS</div>"; 
-            if ($_GET['error_login'] == 3)
-                echo "<div class='alert alert-success'>Ingresa para activar la cuenta</div>"; 
-            if ($_GET['error_login'] == 4)
-                echo "<div class='alert alert-warning'>Verifica tu email</div>";
-            if ($_GET['error_login'] == 5)
-                echo "<div class='alert alert-danger'>Email no encontrado</div>";
-    
-        }
-        ?>
+
         <div class="col-md-4 col-md-offset-4" style="margin-top:100px;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Login</h4>
+                    <h4 class="panel-title">Registrarse</h4>
                 </div>
                 <br><br>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form" action="aut_verifica.php" method="post" enctype="multipart/form-data">
+                    <form accept-charset="UTF-8" role="form" action="" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Email" name="user" type="text">
+                                <input class="form-control" placeholder="Nombre" name="user" type="text">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Contraseña" name="pass" type="password" value="">
+                                <input class="form-control" placeholder="Email" name="email" type="email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="pass" type="password">
                             </div>
 
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar"><br>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Enviar"><br>
                             <hr>
-                           
-                            <center>
-                                <a href="olvido.php" class="btn btn-warning">Olvido la contraseña</a>
-                            </center>
-                     
-                            <hr>
-                            <center>
-                                <a href="registro.php" class="btn btn-success">Registrarse</a>
-                            </center>
+                            <br>
+
                         </fieldset>
                     </form>
 

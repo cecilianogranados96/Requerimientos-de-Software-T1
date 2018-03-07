@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require("config.php");
 $redir = "http://".$_SERVER['HTTP_HOST']."/Login/";
 $con = new mysqli("$host", "$usuario", "$contrasena", "$base");
