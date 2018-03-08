@@ -63,6 +63,11 @@
                                 Tipo
                                 </center>
                             </td>
+                             <td>
+                                <center>
+                                Estado
+                                </center>
+                            </td>
                             <td>
                                 <center>
                                 Acciones
@@ -81,6 +86,14 @@ while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
     }else{
         $tipo = "Usuario";
     }
+    
+    if ($line['estado'] == 1){
+        $estado = "Activo";
+    }else{
+        $estado = "Inactivo";
+    }
+    
+    
     echo "     <tr>
                             <td> 
                                 ".$line['nombre']."
@@ -88,9 +101,15 @@ while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
                             <td>
                                 ".$line['email']."
                             </td>
+                            
                             <td>
                                 $tipo
                             </td>
+                            
+                             <td>
+                                $estado
+                            </td>
+                            
                             <td>
                                 <a href='editar.php?id= ".$line['id_usuario']."' class='btn btn-success'>Editar</a>
                             </td>

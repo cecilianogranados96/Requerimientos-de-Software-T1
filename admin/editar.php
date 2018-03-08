@@ -10,6 +10,11 @@ $line = mysql_fetch_array($result, MYSQL_ASSOC);
     }else{
         $tipo = "Usuario";
     }
+    if ($line['estado'] == 1){
+        $estado = "Activo";
+    }else{
+        $estado = "Inactivo";
+    }
 
 	if (isset($_POST['user'])){
         
@@ -23,7 +28,8 @@ $line = mysql_fetch_array($result, MYSQL_ASSOC);
             UPDATE `usuario` SET $agregar
             `email`= '".$_POST['email']."',
             `nombre`='".$_POST['user']."',
-            `tipo`='".$_POST['tipo']."' WHERE `id_usuario`= '".$_GET['id']."' ";
+            `tipo`='".$_POST['tipo']."',
+            `estado`='".$_POST['estado']."' WHERE `id_usuario`= '".$_GET['id']."' ";
             
             $consulta = mysql_query($consulta_sql);
             
@@ -106,6 +112,16 @@ $line = mysql_fetch_array($result, MYSQL_ASSOC);
                                     <option value="0">Usuario</option>
                                 </select>
                             </div>
+                               <div class="form-group">
+                                Estado:<br>
+                                <select name="estado" class="form-control">
+                                    <?php echo " <option value='".$line['estado']."'>$estado</option>"; ?>
+                                    <option value="1">Activo</option>
+                                    <option value="0">Inactivo</option>
+                                </select>
+                            </div>
+                            
+                            
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Actualizar"><br>
                             <hr>
                             <br>

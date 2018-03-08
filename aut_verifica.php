@@ -1,7 +1,7 @@
 <?php
 
 require("config.php");
-$redir = "http://".$_SERVER['HTTP_HOST']."/Login/";
+$redir = "http://".$_SERVER['HTTP_HOST']."/reque/";
 $con = new mysqli("$host", "$usuario", "$contrasena", "$base");
 if ($con->connect_errno)
 {
@@ -15,9 +15,17 @@ if (isset($_POST['user']) && isset($_POST['pass']))
 {
     $user = mysqli_real_escape_string($con, $_POST['user']);
     $pass = (mysqli_real_escape_string($con, $_POST['pass']));
-	$consulta_sql = "SELECT * FROM usuario WHERE email = '$user' ";
+	$consulta_sql = "SELECT * FROM usuario WHERE email = '$user'";
     $consulta = mysqli_query($con, $consulta_sql);
 	$usuario_datos = mysqli_fetch_array($consulta);
+    
+    if ($usuario_datos['estado'] == 0){
+		session_destroy();
+		echo "<script languaje='JavaScript'>location.href='$redir?error_login=6';</script>";
+		exit;
+	}
+    
+    
 	if ($usuario_datos['email'] != $user){
 		session_destroy();
 		echo "<script languaje='JavaScript'>location.href='$redir?error_login=1';</script>";

@@ -38,6 +38,8 @@
                 echo "<div class='alert alert-warning'>Verifica tu email</div>";
             if ($_GET['error_login'] == 5)
                 echo "<div class='alert alert-danger'>Email no encontrado</div>";
+            if ($_GET['error_login'] == 6)
+                echo "<div class='alert alert-danger'>Usuario Inactivo - Contacta con soporte</div>";
     
         }
         ?>
@@ -51,10 +53,10 @@
                     <form accept-charset="UTF-8" role="form" action="aut_verifica.php" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Email" name="user" type="text">
+                                <input class="form-control" placeholder="Email" name="user" type="text" required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Contraseña" name="pass" type="password" value="">
+                                <input class="form-control" placeholder="Contraseña" name="pass" type="password" required>
                             </div>
 
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar"><br>

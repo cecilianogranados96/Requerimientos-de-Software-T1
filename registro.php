@@ -1,18 +1,28 @@
 <?php 
 	include "config.php";
 	if (isset($_POST['email'])){
-            $user =$_POST['email'];
-            $consulta_sql = "INSERT INTO `usuario`(`pass`, `email`, `nombre`) VALUES (
-            '".md5($_POST['pass'])."',
-             '".$_POST['email']."',
-              '".$_POST['user']."'
-            ) ";
-            $consulta = mysql_query($consulta_sql);
-            
-           
         
-			echo "<script>alert('Registrado con exito!'); window.location='index.php?error_login=3'</script>";
-                
+         $user =$_POST['email'];
+        
+        
+             $consulta_sql = "SELECT * FROM usuario WHERE email = '$user' ";
+            $consulta = mysql_query($consulta_sql);
+   
+            if (mysql_num_rows($consulta) == 0 ){ 
+                    
+                    
+                    
+           
+                $consulta_sql = "INSERT INTO `usuario`(`pass`, `email`, `nombre`) VALUES (
+                '".md5($_POST['pass'])."',
+                 '".$_POST['email']."',
+                  '".$_POST['user']."'
+                ) ";
+                $consulta = mysql_query($consulta_sql);
+                echo "<script>alert('Registrado con exito!'); window.location='index.php?error_login=3'</script>";
+            }else{
+                echo "<script>alert('Existe un registro con ese email recupera la contraseña!'); window.location='index.php'</script>";
+            }
     
     }
 ?>
@@ -34,6 +44,8 @@
 
         <div class="col-md-4 col-md-offset-4" style="margin-top:100px;">
             <div class="panel panel-default">
+                       <a href="#" onclick="window.history.back();" class="btn btn-danger">Regresar</a>
+                <br><br>
                 <div class="panel-heading">
                     <h4 class="panel-title">Registrarse</h4>
                 </div>
@@ -42,13 +54,13 @@
                     <form accept-charset="UTF-8" role="form" action="" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Nombre" name="user" type="text">
+                                <input class="form-control" placeholder="Nombre" name="user" type="text" required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Email" name="email" type="email">
+                                <input class="form-control" placeholder="Email" name="email" type="email" required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="pass" type="password">
+                                <input class="form-control" placeholder="Password" name="pass" type="password" required>
                             </div>
 
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Enviar"><br>

@@ -1,9 +1,9 @@
 <?php
 session_start();
     $host = "localhost";
-    $contrasena ="";
-    $usuario = "root";
-    $base ="reque";
+    $contrasena ="admin123*";
+    $usuario = "admin_reque";
+    $base ="admin_reque";
    
     /*******************************************/
 
@@ -11,8 +11,6 @@ session_start();
     mysql_select_db("$base",$conexion);	
     mysql_query ("SET NAMES 'utf8'");
     date_default_timezone_set('America/Costa_Rica');
-
-
 
 define('MAILGUN_URL', 'https://api.mailgun.net/v3/mg.synappcr.com');
 define('MAILGUN_KEY', 'key-a2e3503766e936bbfa5eda7a1df52779'); 

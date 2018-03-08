@@ -5,20 +5,14 @@
             $consulta_sql = "SELECT * FROM usuario WHERE email = '$user' ";
             $consulta = mysql_query($consulta_sql);
             $usuario_datos = mysql_fetch_array($consulta);
-                if (mysql_num_rows($consulta) != 0 ){     
+        echo mysql_num_rows($consulta);
+                if (mysql_num_rows($consulta) == 1 ){    
+                    echo "ENTRE";
                     $rand = rand();
                     $consulta_sql = "UPDATE `usuario` SET `cod`='".$rand."' WHERE `email` = '$user' ";
                     mysql_query($consulta_sql);
-                    sendmailbymailgun("cecilianogranados96@gmail.com",
-                    "Sistema de Login",
-                    "Sistema de Login",
-                    "info@synappcr.com",
-                    "Cambio de contraseña",
-                    "Para cambiar la contraseña introduce el siguiente codigo: $rand",
-                    "Para cambiar la contraseña introduce el siguiente codigo: $rand",
-                    "",
-                    $user);      
-                    echo "<script languaje='JavaScript'>alert('Se envio un correo, verifica tu email y pega el codigo.'); location.href='new_pass.php';</script>";
+                    //print_r(sendmailbymailgun("cecilianogranados96@gmail.com","Sistema de Login","Sistema de Login","info@synappcr.com", "Cambio de contraseña","Para cambiar la contraseña introduce el siguiente codigo: $rand","Para cambiar la contraseña introduce el siguiente codigo: $rand","", $user));      
+                    echo "<script languaje='JavaScript'>alert('Se envio un correo, verifica tu email y pega el codigo. ".$rand."'); location.href='new_pass.php';</script>";
                     exit;
             }else{
 			 echo "<script>window.location='index.php?error_login=5'</script>";
@@ -55,7 +49,7 @@
                     <form accept-charset="UTF-8" role="form" action="" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Email" name="user" type="text">
+                                <input class="form-control" placeholder="Email" name="user" type="text" required>
                             </div>
 
 

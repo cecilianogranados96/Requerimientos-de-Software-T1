@@ -50,10 +50,10 @@
                     <form accept-charset="UTF-8" role="form" action="" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Nuevo Password" name="pass" type="text">
+                                <input class="form-control" placeholder="Nuevo Password" name="pass" type="text" required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Codigo de verificacion" name="cod" type="text">
+                                <input class="form-control" placeholder="Codigo de verificacion" name="cod" type="text" required>
                             </div>
 
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Enviar"><br>
